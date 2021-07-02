@@ -1,0 +1,87 @@
+openapi: '3.0.3'
+info:
+  title: FSL-Api
+  version: '1.0'
+  contact:
+    name: "API Support"
+    url: https://api.foundationsoft.com/support
+    email: "test@foundationsoft.com"
+servers:
+  - url: https://api.foundationsoft.com
+    description: Production API Url
+  - url: https://api-sandbox.foundationsoft.com
+    description: Sandbox API Url
+paths:
+  /customers:
+    description: List Customers
+    summary: "Access customers belonging to a foundation company."
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+              examples:
+                list:
+                  value:
+                    companyNo: 1
+                    customerNo: "         1"
+                    name: New York State
+                    addressLine1: 123 Main St
+                    addressLine2:
+                    city: New York City
+                    state: NY
+                    zipCode: '12345       '
+                    contact: Mayor
+                    phoneNumber:
+                    faxNumber:
+                    emailAddress:
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        companyNo: 
+          type: integer
+          format: int32
+        customerNo: 
+          type: string
+        name: 
+          type: string
+          maxLength: 100
+        addressLine1:
+          type: string
+          maxLength: 100
+        addressLine2:
+          type: string
+          maxLength: 100
+        city:
+          type: string
+          maxLength: 50
+        state:
+          type: string
+          maxLength: 2
+        zipCode:
+          type: string
+          maxLength: 12
+        contact:
+          type: string
+          maxLength: 50
+        phoneNumber:
+          type: string
+          maxLength: 50
+        faxNumber:
+          type: string
+          maxLength: 50
+        emailAddress:
+          type: string
+          maxLength: 50
+  responses:
+    NotFound:
+      description: Entity not found.
+      
